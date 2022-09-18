@@ -1,4 +1,6 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
+﻿using Application.Features.Developers.Rules;
+using Application.Features.ProgrammingLanguages.Rules;
+using Application.Features.SocialMedias.Rules;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
@@ -20,6 +22,8 @@ namespace Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ProgrammingLanguageBusinessRules>();
+            services.AddScoped<DeveloperBusinessRules>();
+            services.AddScoped<SocialMediaBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

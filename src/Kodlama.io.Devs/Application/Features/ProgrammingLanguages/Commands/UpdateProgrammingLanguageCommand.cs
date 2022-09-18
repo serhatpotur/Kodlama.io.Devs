@@ -34,7 +34,6 @@ namespace Application.Features.ProgrammingLanguages.Commands
             {
                 //await _programmingLanguageBusinessRules.ProgrammingLanguageToBeUpdatedWaNotFound(request.Id);
 
-
                 //ProgrammingLanguage? programmingLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 //ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
 

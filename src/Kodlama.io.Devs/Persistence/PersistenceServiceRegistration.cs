@@ -22,6 +22,10 @@ namespace Persistence
                     configuration.GetConnectionString("KodlamaDevsConnectionString")));
 
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
+            services.AddScoped<IProgrammingLanguageTechnologyRepository, ProgrammingLanguageTechnologyRepository>();
+            services.AddScoped<IDeveloperRepository, DeveloperRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
 
             return services;
         }
