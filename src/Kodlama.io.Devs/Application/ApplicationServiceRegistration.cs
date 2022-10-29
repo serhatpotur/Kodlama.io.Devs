@@ -1,6 +1,5 @@
-﻿using Application.Features.Developers.Rules;
+﻿using Application.Features.Auth.Rules;
 using Application.Features.ProgrammingLanguages.Rules;
-using Application.Features.SocialMedias.Rules;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
