@@ -1,5 +1,8 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Features.Github.Rules;
 using Application.Features.ProgrammingLanguages.Rules;
+using Application.Services.AuthService;
+using Application.Services.Repositories;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
@@ -21,12 +24,13 @@ namespace Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ProgrammingLanguageBusinessRules>();
-            services.AddScoped<DeveloperBusinessRules>();
-            services.AddScoped<SocialMediaBusinessRules>();
+            services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<GithubProfileRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddScoped<IAuthService, AuthManager>();
 
             return services;
         }

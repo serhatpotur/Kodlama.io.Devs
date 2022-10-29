@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Auth\Profiles\" />
     <Folder Include="Features\ProgrammingLanguagesTechnologies\Rules\" />
-    <Folder Include="Features\SocialMedias\Queries\" />
-    <Folder Include="Features\SocialMedias\Profiles\" />
   </ItemGroup>
 
 </Project>

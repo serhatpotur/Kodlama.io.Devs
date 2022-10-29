@@ -16,8 +16,7 @@ namespace Persistence.Context
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> programmingLanguages { get; set; }
         public DbSet<ProgrammingLanguageTechnology> programmingLanguageTechnologies { get; set; }
-        public DbSet<Developer> Developers { get; set; }
-        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<GithubProfile> GithubProfiles { get; set; }
 
         //public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
@@ -71,11 +70,15 @@ namespace Persistence.Context
                 p.HasMany(p => p.RefreshTokens);
             });
 
-            modelBuilder.Entity<Developer>(p =>
+            modelBuilder.Entity<GithubProfile>(p =>
             {
-                p.ToTable("Developers");
-                p.HasMany(p => p.SocialMedias);
+                p.ToTable("GithubProfiles").HasKey(k => k.Id);
+                p.Property(p => p.Id).HasColumnName("Id");
+                p.Property(p => p.UserId).HasColumnName("UserId");
+                p.Property(p => p.GithubUrl).HasColumnName("GithubUrl");
+                p.HasOne(p => p.User);
             });
+
 
             modelBuilder.Entity<OperationClaim>(p =>
             {
@@ -94,15 +97,7 @@ namespace Persistence.Context
                 p.HasOne(p => p.User);
             });
 
-            modelBuilder.Entity<SocialMedia>(p =>
-            {
-                p.ToTable("SocialMedias").HasKey(k => k.Id);
-                p.Property(p => p.Id).HasColumnName("Id");
-                p.Property(p => p.DeveloperId).HasColumnName("DeveloperId");
-                p.Property(p => p.SocialMediaName).HasColumnName("SocialMediaName");
-                p.Property(p => p.SocialMediaUrl).HasColumnName("SocialMediaUrl");
-                p.HasOne(p => p.Developer);
-            });
+         
 
 
             ProgrammingLanguage[] ProgrammingLanguageEntitySeeds = { new(1, "C#"), new(2, "Java") };
