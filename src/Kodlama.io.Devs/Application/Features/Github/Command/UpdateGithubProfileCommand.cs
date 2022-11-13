@@ -16,33 +16,41 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Github.Command
 {
-    public class CreateGithubProfileCommand : IRequest<CreatedGithubProfileDto>
+    public class UpdateGithubProfileCommand : IRequest<UpdatedGithubProfileDto>
     {
+
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string GithubUrl { get; set; }
-        public class CreateGithubProfileCommandHandler : IRequestHandler<CreateGithubProfileCommand, CreatedGithubProfileDto>
+        public class UpdateGithubProfileCommandHandler : IRequestHandler<UpdateGithubProfileCommand, UpdatedGithubProfileDto>
         {
             private readonly IGithubProfileRepository _guthubProfileRepository;
             private readonly IMapper _mapper;
             private readonly GithubProfileRules _githubProfileRules;
 
-            public CreateGithubProfileCommandHandler(IGithubProfileRepository guthubProfileRepository, IMapper mapper, GithubProfileRules githubProfileRules)
+            public UpdateGithubProfileCommandHandler(IGithubProfileRepository guthubProfileRepository, IMapper mapper, GithubProfileRules githubProfileRules)
             {
                 _guthubProfileRepository = guthubProfileRepository;
                 _mapper = mapper;
                 _githubProfileRules = githubProfileRules;
             }
 
-            public async Task<CreatedGithubProfileDto> Handle(CreateGithubProfileCommand request, CancellationToken cancellationToken)
+            public async Task<UpdatedGithubProfileDto> Handle(UpdateGithubProfileCommand request, CancellationToken cancellationToken)
             {
                 await _githubProfileRules.GithubCanNotBeDuplicatedWhenInserted(request.GithubUrl);
-                GithubProfile mappedGithubProfile = _mapper.Map<GithubProfile>(request);
-                GithubProfile addedGithubProfile = await _guthubProfileRepository.AddAsync(mappedGithubProfile);
-                CreatedGithubProfileDto createdDto = _mapper.Map<CreatedGithubProfileDto>(addedGithubProfile);
-                return createdDto;
 
+                GithubProfile? githubProfile = await _guthubProfileRepository.GetAsync(p => p.Id == request.Id);
+                _githubProfileRules.GithubProfileShouldExistWhenRequested(githubProfile);
 
+                githubProfile.GithubUrl = request.GithubUrl;
+
+                GithubProfile updatedGithubProfile = await _guthubProfileRepository.UpdateAsync(githubProfile);
+
+                UpdatedGithubProfileDto updatetedGithubProfileDto = _mapper.Map<UpdatedGithubProfileDto>(updatedGithubProfile);
+
+                return updatetedGithubProfileDto;
             }
         }
+
     }
 }

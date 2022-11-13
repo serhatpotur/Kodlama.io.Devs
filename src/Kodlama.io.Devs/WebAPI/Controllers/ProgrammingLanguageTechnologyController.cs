@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             return Ok(technologyDto);
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdatePLTechnologyCommand updateCommand)
         {
             UpdatedPLTechnologyDto technologyDto = await Mediator.Send(updateCommand);

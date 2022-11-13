@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         {
             LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IpAdress = GetIpAddress() };
             LoginedDto loginedDto = await Mediator.Send(loginCommand);
-            return Created("", loginedDto.AccessToken);
+            return Ok(loginedDto.AccessToken);
         }
 
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)

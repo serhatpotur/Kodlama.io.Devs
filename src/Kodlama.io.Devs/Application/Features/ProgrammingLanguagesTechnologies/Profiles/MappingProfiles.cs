@@ -30,7 +30,7 @@ namespace Application.Features.ProgrammingLanguagesTechnologies.Profiles
             CreateMap<ProgrammingLanguageTechnology, PLTechnologyListDto>().ReverseMap();
             CreateMap<IPaginate<ProgrammingLanguageTechnology>, PLTechnologyListModel>().ReverseMap();
 
-            CreateMap<ProgrammingLanguageTechnology, PLTechnologyListDto>().ReverseMap();
+            CreateMap<ProgrammingLanguageTechnology, PLTechnologyGetByIdDto>().ReverseMap();
 
         }
     }
