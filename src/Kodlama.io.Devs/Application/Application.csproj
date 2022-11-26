@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Features\Auth\Profiles\" />
     <Folder Include="Features\ProgrammingLanguagesTechnologies\Rules\" />
+    <Folder Include="Features\UserOperationClaims\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ namespace Persistence.Context
         public DbSet<ProgrammingLanguageTechnology> programmingLanguageTechnologies { get; set; }
         public DbSet<GithubProfile> GithubProfiles { get; set; }
 
-        //public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
@@ -97,7 +97,7 @@ namespace Persistence.Context
                 p.HasOne(p => p.User);
             });
 
-         
+
 
 
             ProgrammingLanguage[] ProgrammingLanguageEntitySeeds = { new(1, "C#"), new(2, "Java") };
@@ -108,6 +108,9 @@ namespace Persistence.Context
 
             OperationClaim[] OperationClaimEntitySeeds = { new(1, "Admin"), new(2, "User") };
             modelBuilder.Entity<OperationClaim>().HasData(OperationClaimEntitySeeds);
+
+            UserOperationClaim[] UserOperationClaimEntitySeeds = { new(1, 1, 1), new(2, 2, 2) };
+            modelBuilder.Entity<UserOperationClaim>().HasData(UserOperationClaimEntitySeeds);
 
 
 
